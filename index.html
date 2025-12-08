@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DOOM BOY - Home</title>
+    <title>DOOM BOY - Home (Red Edition)</title>
     <style>
         /* Fonte estilo 8-bit */
         @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
@@ -18,22 +18,22 @@
             justify-content: center;
         }
 
-        /* --- O GAME BOY (Chassi) --- */
+        /* --- O GAME BOY (Vermelho) --- */
         .gameboy {
-            background-color: #c0c0c0; /* Cinza Clássico */
+            background-color: #dc0000; /* ALTERADO PARA VERMELHO */
             width: 320px;
             height: 540px;
             border-radius: 15px 15px 60px 15px;
             padding: 20px;
             box-shadow: 
-                inset 5px 5px 10px rgba(255,255,255,0.4), /* Luz */
+                inset 5px 5px 10px rgba(255,255,255,0.3), /* Luz ajustada */
                 10px 10px 20px rgba(0,0,0,0.5); /* Sombra externa */
             position: relative;
         }
 
         /* --- MOLDURA DA TELA --- */
         .screen-bezel {
-            background-color: #777;
+            background-color: #555; /* Cinza mais escuro para contrastar com o vermelho */
             border-radius: 10px 10px 40px 10px;
             padding: 30px 40px;
             box-shadow: inset 2px 2px 5px rgba(0,0,0,0.3);
@@ -149,7 +149,7 @@
             display: block; /* Importante para o link funcionar */
             width: 40px;
             height: 40px;
-            background-color: #8B0000; /* Vermelho escuro */
+            background-color: #222; /* ALTERADO: Preto para contrastar com vermelho */
             border-radius: 50%;
             box-shadow: 
                 2px 2px 5px rgba(0,0,0,0.3), 
@@ -197,7 +197,7 @@
         
         .pill-label {
             font-size: 10px;
-            color: #555;
+            color: #333;
             text-align: center;
             margin-top: 5px;
             transform: rotate(-25deg);
@@ -214,7 +214,7 @@
         .speaker-slot {
             width: 60px;
             height: 4px;
-            background-color: rgba(0,0,0,0.1);
+            background-color: rgba(0,0,0,0.2); /* Sombra mais forte para ver no vermelho */
             margin-bottom: 4px;
             border-radius: 2px;
             transform: rotate(-25deg);
@@ -226,7 +226,7 @@
     <div class="gameboy">
         <div class="screen-bezel">
             <div class="bezel-lines"></div>
-            <div class="bezel-text">DOT MATRIX WITH STEREO</div>
+            <div class="bezel-text">Qualquer semelhança é mera coincidência</div>
             <div class="battery-light"></div>
             
             <div class="lcd-screen">
@@ -250,12 +250,12 @@
 
                 <div class="btn-group">
                     <div class="btn-round" style="margin-top: 20px;"></div>
-                    <span class="btn-label" style="right: 50px; bottom: 0;"></span>
+                    <span class="btn-label" style="right: 50px; bottom: 0;">B</span>
                 </div>
 
                 <div class="btn-group">
                     <a href="game.html" target="_blank" class="btn-round" title="Start Game"></a>
-                    <span class="btn-label" style="right: -5px;"></span>
+                    <span class="btn-label" style="right: -5px;">A</span>
                 </div>
             </div>
 
