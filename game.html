@@ -4,186 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DOOM BOY - Game</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
-        * { box-sizing: border-box; font-family: 'Press Start 2P', cursive; }
-
-        body {
-            background-color: #222;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        /* --- O GAME BOY (Agora Vermelho) --- */
-        .gameboy {
-            background-color: #dc0000; /* ALTERADO PARA VERMELHO */
-            width: 320px;
-            height: 540px;
-            border-radius: 15px 15px 60px 15px;
-            padding: 20px;
-            box-shadow: 
-                inset 5px 5px 10px rgba(255,255,255,0.3),
-                10px 10px 20px rgba(0,0,0,0.5);
-            position: relative;
-        }
-
-        .screen-bezel {
-            background-color: #555; /* Um pouco mais escuro para contrastar com o vermelho */
-            border-radius: 10px 10px 40px 10px;
-            padding: 30px 40px;
-            box-shadow: inset 2px 2px 5px rgba(0,0,0,0.3);
-            margin-bottom: 40px;
-            position: relative;
-        }
-
-        .bezel-text {
-            color: #b0b0b0;
-            font-size: 10px;
-            position: absolute;
-            top: 10px;
-            width: 100%;
-            text-align: center;
-            left: 0;
-            letter-spacing: 1px;
-        }
-        
-        .bezel-lines {
-            position: absolute;
-            top: 10px;
-            left: 15px;
-            width: 90%;
-            height: 2px;
-            border-top: 2px solid #8b0000;
-            border-bottom: 2px solid #00008b;
-            opacity: 0.5;
-        }
-
-        .battery-light {
-            width: 10px;
-            height: 10px;
-            background-color: #FF0000; /* LIGADA! */
-            box-shadow: 0 0 5px #ff0000;
-            border-radius: 50%;
-            position: absolute;
-            top: 40%;
-            left: 10px;
-        }
-
-        /* A Tela LCD COM O JOGO */
-        .lcd-screen {
-            background-color: #8bac0f;
-            background-image: linear-gradient(#8bac0f 50%, #7e9c0d 50%);
-            background-size: 100% 4px;
-            width: 100%;
-            height: 180px;
-            box-shadow: inset 3px 3px 8px rgba(0,0,0,0.6);
-            display: flex;
-            flex-direction: column;
-            color: #0f380f;
-            padding: 5px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        /* --- ELEMENTOS DO JOGO (Miniaturizados) --- */
-        .hud-top {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.5rem;
-            border-bottom: 2px solid #0f380f;
-            padding-bottom: 2px;
-            margin-bottom: 5px;
-        }
-
-        .reels-container {
-            display: flex;
-            justify-content: space-between;
-            gap: 2px;
-            background: #0f380f; /* Fundo escuro para os rolos */
-            padding: 2px;
-            border: 2px solid #0f380f;
-            height: 80px;
-            position: relative;
-        }
-
-        .reel {
-            background: #8bac0f; /* Cor da tela */
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
-        }
-
-        .payline {
-            position: absolute;
-            top: 50%;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: rgba(15, 56, 15, 0.5); /* Linha escura */
-            z-index: 5;
-        }
-
-        .hud-bottom {
-            margin-top: auto;
-            border-top: 2px solid #0f380f;
-            padding-top: 2px;
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.5rem;
-        }
-        
-        .face-box {
-            border: 1px solid #0f380f;
-            padding: 2px;
-            font-size: 1.2rem;
-            line-height: 1;
-        }
-
-        /* --- CONTROLES --- */
-        .controls-area { position: relative; height: 200px; }
-        
-        .d-pad { position: absolute; top: 20px; left: 20px; width: 90px; height: 90px; }
-        .d-pad div { background-color: #333; position: absolute; border-radius: 3px; box-shadow: 2px 2px 0 rgba(0,0,0,0.2); }
-        .d-pad .h { width: 100%; height: 30px; top: 30px; }
-        .d-pad .v { width: 30px; height: 100%; left: 30px; }
-        .d-pad .middle { width: 30px; height: 30px; top: 30px; left: 30px; background: radial-gradient(circle, #222 10%, #333 80%); z-index: 2;}
-
-        .action-buttons { position: absolute; top: 30px; right: 20px; display: flex; gap: 15px; transform: rotate(-25deg); }
-
-        .btn-round {
-            width: 40px;
-            height: 40px;
-            background-color: #222; /* ALTERADO: Botões pretos ficam melhores no fundo vermelho */
-            border-radius: 50%;
-            box-shadow: 2px 2px 5px rgba(0,0,0,0.3), inset -2px -2px 5px rgba(0,0,0,0.2);
-            cursor: pointer;
-        }
-        
-        /* Simulação de clique no botão A */
-        .btn-round:active { box-shadow: inset 2px 2px 5px rgba(0,0,0,0.5); }
-
-        .btn-label { position: absolute; bottom: -20px; right: 10px; font-size: 10px; color: #333; font-weight: bold; }
-
-        .option-buttons { position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); display: flex; gap: 15px; }
-        .btn-pill { width: 50px; height: 12px; background-color: #999; border-radius: 10px; transform: rotate(-25deg); border: 1px solid #777; box-shadow: 1px 1px 2px rgba(0,0,0,0.3); }
-        .pill-label { font-size: 10px; color: #333; text-align: center; margin-top: 5px; transform: rotate(-25deg); display: block; margin-left: -5px; }
-
-        .speaker { position: absolute; bottom: 20px; right: 20px; }
-        .speaker-slot { width: 60px; height: 4px; background-color: rgba(0,0,0,0.2); margin-bottom: 4px; border-radius: 2px; transform: rotate(-25deg); }
-        
-        #slayer{ width: 30px; height: 30px; }
-    </style>
+    <link rel="icon" type="icon" href="assets/favicon.png">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
+<h1>DOOM</h1>
     <div class="gameboy">
         <div class="screen-bezel">
             <div class="bezel-lines"></div>
-            <div class="bezel-text">Qualquer semelhança é mera coincidência</div>
             <div class="battery-light"></div> <div class="lcd-screen">
                 
                 <div class="hud-top">
@@ -193,9 +21,9 @@
 
                 <div class="reels-container">
                     <div class="payline"></div>
-                    <div class="reel">👺</div>
-                    <div class="reel">👺</div>
-                    <div class="reel">💀</div>
+                    <div class="reel">⚔️</div>
+                    <div class="reel">🩸</div>
+                    <div class="reel">☠️</div>
                 </div>
 
                 <div style="text-align: center; font-size: 0.5rem; margin: 5px 0;">PRESSIONE 'A' PARA JOGAR</div>
@@ -205,10 +33,10 @@
                         <div title="Tentativas">AMMO</div>
                         <div title="Tentativas">50</div>
                     </div>
-                    <div class="face-box"><img id="slayer" src="http://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfx8TmExCQnlonOq9pgP_RGtstEiU6GAOq3Q&s" /></div>
+                    <div class="face-box"><img id="slayer" src="assets/doomFaceIcon.png" /></div>
                     <div style="text-align: right">
-                        <div title="Dinheiro disponivel">SANGUE</div>
-                        <div title="Dinheiro disponivel">100%</div>
+                        <div title="Dinheiro disponivel">COINS</div>
+                        <div title="Dinheiro disponivel">9562</div>
                     </div>
                 </div>
 
@@ -216,6 +44,7 @@
         </div>
 
         <div class="controls-area">
+
             <div class="d-pad">
                 <div class="h"></div>
                 <div class="v"></div>
@@ -223,13 +52,14 @@
             </div>
 
             <div class="action-buttons">
+
                 <div class="btn-group">
-                    <button class="btn-round" onclick="window.location.reload();" title="FIRE / SPIN"></button>
-                    <span class="btn-label" style="right: -5px;"></span>
+                    <button class="btn-round"></button>
+                    <span class="btn-label"></span>
                 </div>
                 <div class="btn-group">
                     <div class="btn-round" style="margin-top: 20px;"></div>
-                    <span class="btn-label" style="right: 50px; bottom: 0;"></span>
+                    <span class="btn-label"></span>
                 </div>
             </div>
 
@@ -239,8 +69,9 @@
                     <span class="pill-label" id="off">DESLIGAR</span>
                 </div>
                 <div style="margin-left: 10px;">
+                    <a href="index.html" target="_self">
                     <div class="btn-pill"></div>
-                    <span class="pill-label">COMEÇAR</span>
+                    <span class="pill-label">VOLTAR</span></a>
                 </div>
             </div>
 
@@ -254,6 +85,6 @@
             </div>
         </div>
     </div>
-
+<h1>BOY</h1>
 </body>
 </html>
