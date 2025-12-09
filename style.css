@@ -1,0 +1,317 @@
+/* =========================================
+   1. IMPORTAÇÕES E RESET GLOBAL
+   ========================================= */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+* { 
+    box-sizing: border-box; 
+    font-family: 'Press Start 2P', cursive; 
+    margin: 0; 
+    padding: 0; 
+}
+
+body {
+    background-color: #222;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* =========================================
+   2. ESTRUTURA DO GAME BOY (Carcaça)
+   ========================================= */
+.gameboy {
+    background-color: #a50000; /* Vermelho Clássico */
+    width: 320px;
+    height: 540px;
+    border-radius: 15px 15px 60px 15px;
+    padding: 20px;
+    box-shadow: 
+        inset 5px 5px 10px rgba(255,255,255,0.3), /* Iluminação interna */
+        10px 10px 20px rgba(0,0,0,0.5); /* Sombra externa */
+    position: relative;
+}
+
+/* --- MOLDURA DA TELA (Cinza Escuro) --- */
+.screen-bezel {
+    background-color: #303030;
+    border-radius: 10px 10px 40px 10px;
+    padding: 30px 40px;
+    box-shadow: inset 2px 2px 5px rgba(0,0,0,0.8);
+    margin-bottom: 40px;
+    position: relative;
+}
+
+/* Linhas decorativas (Azul e Vermelho escuro) */
+.bezel-lines {
+    position: absolute;
+    top: 10px;
+    left: 15px;
+    width: 90%;
+    height: 2px;
+    border-top: 2px solid #8b0000;
+    border-bottom: 2px solid #00008b;
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+/* Luz da Bateria */
+.battery-light {
+    width: 10px;
+    height: 10px;
+    background-color: #FF0000; /* LED Ligado */
+    box-shadow: 0 0 5px #ff0000;
+    border-radius: 50%;
+    position: absolute;
+    top: 40%;
+    left: 10px;
+}
+
+/* =========================================
+   3. TELA LCD (Display)
+   ========================================= */
+.lcd-screen {
+    background-color: #8bac0f; /* Verde Musgo Game Boy */
+    background-image: linear-gradient(#8bac0f 50%, #7e9c0d 50%); /* Efeito Scanlines */
+    background-size: 100% 4px;
+    width: 100%;
+    height: 180px;
+    box-shadow: inset 3px 3px 8px rgba(0,0,0,0.6);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* Centraliza conteúdo padrão */
+    text-align: center;
+    color: #0f380f; /* Verde Escuro quase preto (Cor dos pixels) */
+    padding: 10px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* --- ELEMENTOS DE TEXTO (Start Screen) --- */
+.logo {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 0px rgba(15, 56, 15, 0.4);
+}
+
+.blink-text {
+    font-size: 0.6rem;
+    margin-top: 20px;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+/* =========================================
+   4. ELEMENTOS DO JOGO (Vindo do CSS-2)
+   ========================================= */
+/* Topo do HUD (Score, etc) */
+.hud-top {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.5rem;
+    border-bottom: 2px solid #0f380f;
+    padding-bottom: 2px;
+    margin-bottom: 5px;
+    width: 100%;
+}
+
+/* Container dos Rolos (Slots) */
+.reels-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 2px;
+    background: #0f380f; /* Fundo escuro para separar os rolos */
+    padding: 2px;
+    border: 2px solid #0f380f;
+    height: 80px;
+    position: relative;
+    width: 100%;
+}
+
+.reel {
+    background: #8bac0f; /* Cor da tela dentro do rolo */
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    
+    /* Truque do Emoji LCD */
+    color: transparent;
+    opacity: 0.7;
+    text-shadow: 0 0 0 #0f380f; /* Cria silhueta flat */
+    filter: drop-shadow(0px 2px 0px rgba(0,0,0,0.2));
+}
+
+/* Linha de Pagamento */
+.payline {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: rgba(15, 56, 15, 0.5);
+    z-index: 5;
+}
+
+/* Rodapé do HUD */
+.hud-bottom {
+    margin-top: auto;
+    border-top: 2px solid #0f380f;
+    padding-top: 2px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.5rem;
+    width: 100%;
+}
+
+.face-box {
+    border: 1px solid #0f380f;
+    padding: 2px;
+    font-size: 1.2rem;
+    line-height: 1;
+}
+
+/* Estilo para Imagem Customizada (ex: Slayer) */
+#slayer {
+    width: 30px;
+    height: 30px;
+    /* Truque para integrar imagem ao LCD */
+    filter: grayscale(100%) contrast(150%); 
+    mix-blend-mode: multiply; 
+    opacity: 0.9; 
+}
+
+/* =========================================
+   5. CONTROLES E BOTÕES
+   ========================================= */
+.controls-area {
+    position: relative;
+    height: 200px;
+}
+
+/* --- D-PAD (Direcionais) --- */
+.d-pad {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 90px;
+    height: 90px;
+}
+.d-pad div { 
+    background-color: #333; 
+    position: absolute; 
+    border-radius: 3px; 
+    box-shadow: 2px 2px 0 rgba(0,0,0,0.2); 
+}
+.d-pad .h { width: 100%; height: 30px; top: 30px; }
+.d-pad .v { width: 30px; height: 100%; left: 30px; }
+.d-pad .middle { 
+    width: 30px; 
+    height: 30px; 
+    top: 30px; 
+    left: 30px; 
+    background: radial-gradient(circle, #222 10%, #333 80%); 
+    z-index: 2;
+}
+
+/* --- BOTÕES A e B --- */
+.action-buttons {
+    position: absolute;
+    top: 30px;
+    right: 20px;
+    display: flex;
+    gap: 15px;
+    transform: rotate(-25deg);
+}
+
+.btn-group {
+    position: relative;
+}
+
+/* Estilo dos Botões Redondos */
+.btn-round {
+    display: block; /* Garante área de clique */
+    width: 40px;
+    height: 40px;
+    background-color: #222; /* Preto (contraste com vermelho) */
+    border-radius: 50%;
+    box-shadow: 
+        2px 2px 5px rgba(0,0,0,0.3), 
+        inset -2px -2px 5px rgba(0,0,0,0.2);
+    cursor: pointer;
+    border: none;
+    transition: all 0.1s;
+}
+
+/* Efeito de clique físico */
+.btn-round:active {
+    box-shadow: inset 2px 2px 5px rgba(0,0,0,0.5);
+    transform: scale(0.95);
+}
+
+.btn-label {
+    position: absolute;
+    bottom: -20px;
+    right: 10px;
+    font-size: 10px;
+    color: #333;
+    font-weight: bold;
+    pointer-events: none;
+}
+
+/* --- SELECT e START --- */
+.option-buttons {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 15px;
+}
+
+.btn-pill {
+    width: 50px;
+    height: 12px;
+    background-color: #999;
+    border-radius: 10px;
+    transform: rotate(-25deg);
+    border: 1px solid #777;
+    box-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+}
+
+.pill-label {
+    font-size: 10px;
+    color: #bdbdbd;
+    text-align: center;
+    margin-top: 5px;
+    transform: rotate(-25deg);
+    display: block;
+    margin-left: -5px;
+}
+
+/* --- SAÍDA DE SOM --- */
+.speaker {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+}
+.speaker-slot {
+    width: 60px;
+    height: 4px;
+    background-color: rgba(0,0,0,0.2);
+    margin-bottom: 4px;
+    border-radius: 2px;
+    transform: rotate(-25deg);
+}
