@@ -1,6 +1,6 @@
 # 👹 DOOM BOY 🍀
 
-Um projeto de interface web desenvolvido puramente com **HTML e CSS** (sem dependência de JavaScript complexo), simulando a experiência de jogar um caça-níquel temático de DOOM em um Game Boy clássico modificado.
+Um projeto de interface web desenvolvido puramente com **HTML e CSS** (sem dependência de JavaScript), simulando a experiência de jogar um caça-níquel temático de DOOM, um jogo clássico e renomado, em um Game Boy clássico modificado.
 
 ![Status do Projeto](https://img.shields.io/badge/Status-Em_Andamento-brightblue)
 ![CSS](https://img.shields.io/badge/CSS-Advanced-blue)
