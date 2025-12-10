@@ -1,4 +1,4 @@
-# 👹 DOOM BOY - Red Edition
+# 👹 DOOM BOY 🍀
 
 Um projeto de interface web desenvolvido puramente com **HTML e CSS** (sem dependência de JavaScript complexo), simulando a experiência de jogar um caça-níquel temático de DOOM em um Game Boy clássico modificado.
 
