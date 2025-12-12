@@ -29,7 +29,8 @@ Um projeto de interface web desenvolvido puramente com **HTML e CSS** (sem depen
 doom-boy/
 ├── assets/
 │   ├── favicon.png
-│   └── doomFaceIcon.jpg
+│   ├── doomFaceIcon.jpg
+│   └── backgroundSpace.png
 ├── index.html       # Tela Inicial (Menu)
 ├── game.html        # Tela do Jogo (Slots)
 ├── style.css        # Estilização
