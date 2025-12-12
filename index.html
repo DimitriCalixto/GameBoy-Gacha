@@ -10,8 +10,7 @@
 <body>
     <div class="gameboy">
         <div class="screen-bezel">
-            <div class="bezel-lines"></div>
-            <div class="battery-light"></div>
+            <div class="battery-light"><p id="text-power">power</p></div>
             
             <div class="lcd-screen">
                 <div class="logo">DOOM<br>BOY</div>
@@ -20,26 +19,26 @@
                 
                 <div style="font-size: 8px; margin-top: 20px;">© 2025 DIMAS >:D</div>
             </div>
-            <h2 id="sub-gbp">GAME BOY pocket</h2>
+            <h2 id="sub-gbp">GAME BOY<mark>pocket</mark></h2>
         </div>
 
         <div class="controls-area">
             
             <div class="d-pad">
-                <div class="h"></div>
-                <div class="v"></div>
+                <div class="fbtn-y"></div>
+                <div class="fbtn-x"></div>
                 <div class="middle"></div>
             </div>
 
             <div class="action-buttons">
 
                 <div class="btn-group">
-                    <div class="btn-round" style="margin-top: 20px;"></div>
+                    <div class="btn-round" id="btn-A" style="margin-top: 20px;"></div>
                     <span class="btn-label"></span>
                 </div>
 
                 <div class="btn-group">
-                    <a href="game.html" target="_self" class="btn-round" title="Start Game" style="margin-top: 20px;"></a>
+                    <a href="game.html" target="_self" class="btn-round" id="btn-B" title="Start Game" style="margin-top: 20px;"></a>
                     <span class="btn-label"></span>
                 </div>
             </div>
@@ -66,6 +65,5 @@
             </div>
         </div>
     </div>
-
 </body>
 </html>
